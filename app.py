@@ -1,10 +1,10 @@
 from flask import Flask
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 @app.route('/')
 def index():
-    return 'this is gonna be our home page'
+    return app.send_static_file('index.html')
 
 
 if __name__ == '__main__':
