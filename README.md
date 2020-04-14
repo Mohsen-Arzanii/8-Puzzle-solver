@@ -1,4 +1,4 @@
-<p align="center"><img src="img/screen-shot.png" width="380"></p>
+<p align="center"><img src="screen-shot.png" width="380"></p>
 
 # Eight Puzzle
 Implementation of some heuristic search algorithms to solve the 8-Puzzle problem
