@@ -109,9 +109,11 @@ select {
     font-size: 40px;
     text-align: center;
 }
-.eight-puzzle li.incorrect {
+
+.eight-puzzle li.empty {
     background-color: #333333;
     color: #ff0000;
+    visibility: hidden;
 }
 
 .eight-puzzle li.correct {
