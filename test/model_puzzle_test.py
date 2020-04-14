@@ -1,6 +1,3 @@
-import sys
-sys.path.append("..")
-
 import unittest
 from model import Puzzle
 
@@ -20,7 +17,4 @@ class TestPuzzleModel(unittest.TestCase):
         state2 = Puzzle('123456789')
         with self.assertRaises(ValueError):
             state2.generate_states()
-
-if __name__ == '__main__':
-    unittest.main()
 
