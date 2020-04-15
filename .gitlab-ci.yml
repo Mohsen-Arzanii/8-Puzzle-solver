@@ -7,4 +7,4 @@ test:
   stage: test
   script:
   - pip3 install -r requirements.txt
-  - python3 test/run_tests.py
+  - python3 app/test/run_tests.py
