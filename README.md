@@ -17,9 +17,24 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### usage
+## usage
 ```sh
 python app.py # or flask run
 ```
 
 open the URL up in your web browser
+
+## manual deployment
+buid the docker (inside project root directory)
+
+```sh
+docker build -t flask-eightpuzzle:latest .
+```
+
+deploy on fandogh (using fandogh-cli):
+
+```sh
+fandogh image publish --version [app version]
+fandogh service deploy --version [app version] --name [app image name... eg. eightpuzzle]
+```
+
