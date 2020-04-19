@@ -18,3 +18,23 @@ class TestPuzzleModel(unittest.TestCase):
         with self.assertRaises(ValueError):
             state2.generate_states()
 
+    def test_solvable(self):
+        # solvable case
+        # 1 | 8 | 2
+        # ----------
+        #   | 4 | 3
+        # ----------
+        # 7 | 6 | 5
+        p1 = Puzzle('182X43765')
+        self.assertTrue(p1.solvable())
+
+        # not solvable case
+        # 8 | 1 | 2
+        # ----------
+        #   | 4 | 3
+        # ----------
+        # 7 | 6 | 5
+ 
+        p2 = Puzzle('812X43765')
+        self.assertFalse(p2.solvable())
+

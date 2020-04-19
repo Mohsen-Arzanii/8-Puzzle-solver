@@ -48,6 +48,27 @@ class Puzzle:
 
         return possible_states
 
+    def solvable(self):
+        '''check if the current state of the puzzle is solvable or not
+        '''
+        # refer to 'http://ethesis.nitrkl.ac.in/5575/1/110CS0081-1.pdf'
+        # you can check the solvablity by counting the number of inversions
+        n = len(self.state)
+        num_of_inversions = 0
+
+        for i in range(n-1):
+            for j in range(i+1, n):
+                if not (self.state[i].isdigit() and self.state[j].isdigit()):
+                    continue
+
+                d1 = int(self.state[i])
+                d2 = int(self.state[j])
+                if d1 > d2:
+                    num_of_inversions += 1
+
+        # a puzzle is solvable if the number of the inversions is even
+        return (num_of_inversions % 2 == 0)
+
     def _same_row(self, index1, index2):
         '''check if two items are in same row
         '''
