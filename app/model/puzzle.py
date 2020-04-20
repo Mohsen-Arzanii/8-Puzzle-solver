@@ -1,7 +1,8 @@
 class Puzzle:
-    __slots__ = ('state', )
+    __slots__ = ('state', 'child')
     def __init__(self, state='12345678X'):
         self.state = state
+        self.child = []
 
     def __eq__(self, puzzle2):
         return self.state == puzzle2.state
