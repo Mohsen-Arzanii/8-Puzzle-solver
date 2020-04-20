@@ -39,7 +39,7 @@ class Puzzle:
         
         if self._same_row(index, right) and self._correct_index(right):
             _new_state = self._swap_cells(index, right)
-            possible_states.append(Puzzle(right))
+            possible_states.append(Puzzle(_new_state))
 
         if self._correct_index(up):
             _new_state = self._swap_cells(index, up)
