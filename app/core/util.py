@@ -19,3 +19,19 @@ def shapeshift(strings):
 
     return res
     
+def getpath(goal, parent):
+    '''return path from state A to B
+       input: goal: puzzle, parent: hashmap
+       return: path: list<str>
+    '''
+    path = []
+    node = goal
+
+    # find parents till the root node
+    while node != None:
+        path = [node] + path
+        node = parent.get(node, None)
+
+    return path
+
+
