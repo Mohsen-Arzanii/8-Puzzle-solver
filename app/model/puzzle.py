@@ -4,11 +4,13 @@ class Puzzle:
         self.state = state
         self.child = []
 
-    def __eq__(self, puzzle2):
-        return self.state == puzzle2.state
+    def __eq__(self, obj2):
+        if type(obj2) == Puzzle:
+            return self.state == obj2.state
+        return self.state == obj2
 
     def __repr__(self):
-        return self.state
+        return str(self.state)
 
     def __hash__(self):
         return hash(self.state)
@@ -37,7 +39,7 @@ class Puzzle:
         
         if self._same_row(index, right) and self._correct_index(right):
             _new_state = self._swap_cells(index, right)
-            possible_states.append(Puzzle(right))
+            possible_states.append(Puzzle(_new_state))
 
         if self._correct_index(up):
             _new_state = self._swap_cells(index, up)

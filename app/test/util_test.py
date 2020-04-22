@@ -30,3 +30,11 @@ class TestUtilShapeShift(unittest.TestCase):
 
         self.assertListEqual(data, must_be)
 
+
+class TestUtilGetPath(unittest.TestCase): 
+    def test_path(self):
+        parent = {'12345678X': '1234567X8'}
+        data = util.getpath('12345678X', parent)
+        must_be = ['1234567X8', '12345678X']
+        self.assertListEqual(data, must_be)
+
