@@ -13,6 +13,7 @@ sys.path.append(str(parent))
 from model_puzzle_test import TestPuzzleModel
 from util_test import TestUtilShapeShift, TestUtilGetPath
 from ids_test import TestIds, TestDfs
+from astar_test import TestManhattanDistance 
 
 if __name__ == '__main__':
     unittest.main()
