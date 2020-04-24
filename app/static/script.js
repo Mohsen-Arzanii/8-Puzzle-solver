@@ -75,10 +75,11 @@ function onclick_run() {
             $(li[i]).html(state[i].val);
             $(li[i]).attr('class', state[i].attrib);
           }
-        }, indx * 1000);
+        }, indx * 600);
       })(delay);
+      // enable button after anitaion completed
+      setTimeout(function() { $("input[name=run]").attr('disabled', false); },
+                 states.length * 600);
     });
-    // enable the button
-    $("input[name=run]").attr('disabled', false);
   });
 }
