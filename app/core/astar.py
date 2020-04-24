@@ -66,6 +66,10 @@ def astar(root):
     if root.solvable() == False:
         return (False, None)
 
+    # so reset parent and visited
+    g_parent.clear()
+    g_visited.clear()
+
     # using a max-heap to store best choices
     root_node = _Node(root, (0, 0))
     heap = [root_node]
@@ -90,7 +94,7 @@ def astar(root):
                 continue
 
             # set current node as parent of the children
-            g_parent[child] = top.puzzle 
+            g_parent[child.state] = top.puzzle.state 
             
             # calculate h and f and make a node from this child
             h = manhattan_dist(child)
