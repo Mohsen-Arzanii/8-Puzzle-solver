@@ -1,9 +1,11 @@
 from flask import Flask, jsonify, render_template, request
+from flask_cors import CORS
 from os import environ
 from model import Puzzle
 from core import util, ids, astar
 
 app = Flask(__name__, static_url_path='/static', template_folder='template')
+CORS(app) # enable cors
 appmode = environ.get('FLASKMODE', '')
 
 # diffrent ports on server and local
@@ -28,8 +30,6 @@ def ajax():
         solvable, path = astar(state)
     else:
         solvable, path = ids(state)
-
-    print(path)
 
     result = util.shapeshift(path) if solvable else None
     return jsonify({'solvable': solvable, 'data': result})
