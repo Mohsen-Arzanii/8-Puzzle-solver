@@ -2,7 +2,7 @@ def shapeshift(strings):
     '''convert a result in format: list of strings
        to a list of dicts to be used in front-end
        params:
-         -- strings: list of strings. eg: ['12345678X', '1324567X8', ...]
+         -- strings: list of strings.
     '''
     res = []
 
