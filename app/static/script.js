@@ -60,6 +60,7 @@ function onclick_run() {
     // some cases are not solvable, so we check that
     if (solvable != true) {
       alert('این حالت قابل حل نمیباشد');
+      $("input[name=run]").attr('disabled', false);
       return;
     }
 
