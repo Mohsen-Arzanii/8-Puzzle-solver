@@ -27,7 +27,7 @@ def dfs_with_limit(node, limit):
             continue
 
         # set parent with current node, parent is useful to find the path
-        g_parent[child] = node
+        g_parent[child.state] = node.state
 
         result = dfs_with_limit(child, limit - 1)
         # found the answer
