@@ -1,5 +1,6 @@
 import unittest
 from core import util
+from model import Puzzle
 
 class TestUtilShapeShift(unittest.TestCase): 
     def test_simple_input(self):
