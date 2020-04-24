@@ -10,21 +10,21 @@
     <div class="view-screen">
         <div class="eight-puzzle">
             <ul class="n-puzzle">
-                <li class="correct" data-tile="4">4</li>
-                <li class="correct" data-tile="4">4</li>
-                <li class="correct" data-tile="4">4</li>
-                <li class="correct" data-tile="4">4</li>
-                <li class="correct" data-tile="4">4</li>
-                <li class="correct" data-tile="4">4</li>
-                <li class="correct" data-tile="4">4</li>
-                <li class="correct" data-tile="4">4</li>
-                <li class="correct" data-tile="4">4</li>
+                <li class="correct">1</li>
+                <li class="correct">2</li>
+                <li class="correct">3</li>
+                <li class="correct">4</li>
+                <li class="correct">5</li>
+                <li class="correct">6</li>
+                <li class="correct">7</li>
+                <li class="correct">8</li>
+                <li class="empty">X</li>
             </ul>
         </div>
         <table>
             <tr>
                 <td>
-                    <input>
+                    <input name="state">
                 </td>
                 <td>
                     <p>حالت شروع</p>
@@ -32,7 +32,7 @@
             </tr>
             <tr>
                 <td>
-                    <input>
+                    <input value="12345678X" disabled>
                 </td>
                 <td>
                     <p>حالت هدف</p>
@@ -41,9 +41,9 @@
 
             <tr>
                 <td>
-                    <select id="cars">
-                    <option value="volvo">IDS</option>
-                    <option value="saab">A-STAR</option>
+                    <select name="approach">
+                    <option value="astar">A-STAR</option>
+                    <option value="ids">IDS</option>
                     </select>
                 </td>
                 <td>
@@ -52,8 +52,10 @@
             </tr>
         </table>
 
-        <input type="button" name="run" value="شروع" onclick="onclick_run()">
-
+        <div class="buttons">
+            <input type="button" name="run" value="شروع" onclick="onclick_run()">
+        </div>
+        <div name="loading" class="loading hide"> <img src='/static/loading.gif'> </div>
     </div>
 </body>
 </html>

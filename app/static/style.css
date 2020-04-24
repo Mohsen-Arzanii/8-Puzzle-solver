@@ -59,7 +59,7 @@ input[type=button] {
     width: 272px;
 }
 
-input[type=button]:hover {
+input[type=button]:hover:enabled {
     color: #00e676;
     border: 1px solid #00e676;
 }
@@ -73,6 +73,11 @@ select {
     padding: 5px;
     background-color: #222222;
     border: 1px solid #444444;
+}
+
+.buttons {
+    margin: auto;
+    width: 272px;
 }
 
 .view-screen {
@@ -121,3 +126,10 @@ select {
     color: #00e676;
 }
 
+.loading {
+    margin-top: 25px;
+}
+
+.hide {
+    display: none;
+}
