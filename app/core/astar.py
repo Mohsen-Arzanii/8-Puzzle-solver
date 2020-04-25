@@ -64,7 +64,7 @@ def astar(root):
 
     # first of all check if the state is solvable at least
     if root.solvable() == False:
-        return (False, None)
+        return (False, 0, None)
 
     # so reset parent and visited
     g_parent.clear()
@@ -74,9 +74,7 @@ def astar(root):
     root_node = _Node(root, (0, 0))
     heap = [root_node]
 
-    numofnodes = 0
     while len(heap) != 0 and heap[0].puzzle != GOAL_STATE:
-        numofnodes += 1
         top = heappop(heap)
 
         # mark current node as visited
@@ -107,5 +105,6 @@ def astar(root):
 
     path = getpath(GOAL_STATE, g_parent) 
 
-    return (True, path)
+    # (solvable, num of nodes, path)
+    return (True, len(g_visited), path)
 

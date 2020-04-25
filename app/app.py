@@ -18,18 +18,14 @@ def index():
 @app.route('/ajax', methods=['POST'])
 def ajax():
     DEFAULT_STATE = Puzzle('12345678X')
-    solvable = path = None
+    solvable = num_of_nodes = path = None
 
     data = request.get_json()
     approach = data.get('approach', None)
     state = Puzzle(data.get('state', DEFAULT_STATE))
 
     # select the correct approach
-    if approach == 'astar':
-        # if the state is not correct we'll replcae that with the goal state
-        solvable, path = astar(state)
-    else:
-        solvable, path = ids(state)
+    solvable, num_of_nodes, path = astar(state) if approach == 'astar' else ids(state)
 
     result = util.shapeshift(path) if solvable else None
     return jsonify({'solvable': solvable, 'data': result})

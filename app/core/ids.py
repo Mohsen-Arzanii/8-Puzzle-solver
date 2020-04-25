@@ -47,7 +47,7 @@ def ids(root):
     global g_visited
     
     if root.solvable() == False:
-        return (False, None)
+        return (False, 0, None)
 
     limit = 5
     answer = None
@@ -58,8 +58,9 @@ def ids(root):
         limit += 5
     
     if answer == None:
-        return (False, None)
+        return (False, 0, None)
     
     path = getpath(GOAL_STATE, g_parent)
-    return (True, path)
+    # (solvable, num of nodes, path)
+    return (True, len(g_visited), path)
 

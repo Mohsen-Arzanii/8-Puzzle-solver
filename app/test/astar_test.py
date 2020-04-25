@@ -12,7 +12,8 @@ class TestManhattanDistance(unittest.TestCase):
 
     def test_path_finding(self):
         p = Puzzle('8672543X1')
-        solvable, data = astar(p)
+        solvable, numofnodes, data = astar(p)
+        self.assertEqual(solvable, True)
 
 
 

@@ -19,23 +19,23 @@ class TestDfs(unittest.TestCase):
 class TestIds(unittest.TestCase): 
     def test_not_solvable(self):
         p = Puzzle('812X43765')
-        solvable, res = ids(p)
+        solvable, numofnodes,res = ids(p)
         self.assertFalse(solvable)
 
     def test_found_answer(self):
         p1 = Puzzle('1234567X8')
-        solvable, data = ids(p1)
+        solvable, numofnodes, data = ids(p1)
         must_be = (True, Puzzle('12345678X'))
         self.assertEqual((solvable, data[-1]), must_be)
 
         p2 = Puzzle('X13425786')
-        solvable, data = ids(p2)
+        solvable, numofnodes, data = ids(p2)
         must_be = (True, Puzzle('12345678X'))
         self.assertEqual((solvable, data[-1]), must_be)
 
     def test_hardest_case(self):
         p1 = Puzzle('8672543X1')
-        solvable, data = ids(p1)
+        solvable, numofnodes, data = ids(p1)
         must_be = (True, Puzzle('12345678X'))
         self.assertEqual((solvable, data[-1]), must_be)
 
