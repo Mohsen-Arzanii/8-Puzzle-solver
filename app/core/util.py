@@ -13,7 +13,7 @@ def shapeshift(strings):
         # represent each cell with: val (int), attrib (css class name)
         for char in string:
             cell = {'val': char}
-            cell['attrib'] = 'correct' if char != 'X' else 'empty'
+            cell['attrib'] = f'correct item{char}' if char != 'X' else 'empty'
             cells.append(cell)
         res.append(cells)
 

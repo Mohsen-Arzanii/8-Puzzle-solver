@@ -28,7 +28,8 @@ def ajax():
     solvable, num_of_nodes, path = astar(state) if approach == 'astar' else ids(state)
 
     result = util.shapeshift(path) if solvable else None
-    return jsonify({'solvable': solvable, 'data': result})
+    return jsonify({'solvable': solvable, 'level': len(result), 
+        'num_of_nodes': num_of_nodes, 'data': result})
 
 
 if __name__ == '__main__':

@@ -10,6 +10,7 @@ html {
 }
 
 body {
+    background-color: #222222;
     padding: 0;
     margin: 0;
 }
@@ -38,7 +39,7 @@ tr td:nth-child(1) {
 
 p {
     text-align: center;
-    padding-top: 10px;
+    padding-top: 2px;
     padding-right: 10px;
     font-size: 15px;
     color: #999999;;
@@ -84,7 +85,7 @@ select {
     width: 100%;
     height: 100%;
     background-color: #222222;
-    border: 1px solid #444444;
+    border: 1px solid #222222;
     text-align:center;
 }
 
@@ -115,6 +116,54 @@ select {
     text-align: center;
 }
 
+.eight-puzzle li.item1 {
+    background: url('/static/imgs/1.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.eight-puzzle li.item2 {
+    background: url('/static/imgs/2.png') bottom left no-repeat;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.eight-puzzle li.item3 {
+    background: url('/static/imgs/3.png') bottom left no-repeat;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.eight-puzzle li.item4 {
+    background: url('/static/imgs/4.png') bottom left no-repeat;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.eight-puzzle li.item5 {
+    background: url('/static/imgs/5.png') bottom left no-repeat;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.eight-puzzle li.item6 {
+    background: url('/static/imgs/6.png') bottom left no-repeat;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.eight-puzzle li.item7 {
+    background: url('/static/imgs/7.png') bottom left no-repeat;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.eight-puzzle li.item8 {
+    background: url('/static/imgs/8.png') bottom left no-repeat;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 .eight-puzzle li.empty {
     background-color: #333333;
     color: #ff0000;
@@ -123,7 +172,7 @@ select {
 
 .eight-puzzle li.correct {
     background-color: #333333;
-    color: #00e676;
+    color: #33FF99;
 }
 
 .loading {

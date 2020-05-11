@@ -1,7 +1,7 @@
 ajaxurl = "http://localhost:5000/ajax";
 
 if (mode == 'server') {
-  ajaxurl = "https://eightpuzzle-amirpalang.fandogh.cloud/ajax";
+  ajaxurl = "https://eightpuzzle-xxx.fandogh.cloud/ajax";
 }
 
 function validate(state) {
@@ -34,6 +34,8 @@ function onclick_run() {
 
   // validation
   if (validate(_state) == false) {
+    $("p[name=numofnodes]").val("-");
+    $("p[name=level]").val("-");
     return;
   }
 
@@ -52,6 +54,8 @@ function onclick_run() {
    }).done(function(res) {
     var li = $('ul li'); // all li elements inside the ul
     var solvable = res.solvable;
+    var numofnodes = res.num_of_nodes;
+    var level = res.level;
     var states = res.data; // all the states to reach the answer
 
     // hide the loading spinner
@@ -63,6 +67,10 @@ function onclick_run() {
       $("input[name=run]").attr('disabled', false);
       return;
     }
+
+    // set num of nodes and level of the goal state
+    $("a[name=numofnodes]").text(numofnodes);
+    $("a[name=level]").text(level);
 
     var delay = 0;
     // apply states
