@@ -2,7 +2,7 @@ from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 from os import environ
 from model import Puzzle
-from core import util, ids, astar
+from core import util, idastar, ucs, ils
 
 app = Flask(__name__, static_url_path='/static', template_folder='template')
 CORS(app) # enable cors
@@ -25,7 +25,12 @@ def ajax():
     state = Puzzle(data.get('state', DEFAULT_STATE))
 
     # select the correct approach
-    solvable, num_of_nodes, path = astar(state) if approach == 'astar' else ids(state)
+    if approach == 'ucs':
+        solvable, num_of_nodes, path = ucs(state)
+    elif approach == 'idastar':
+        solvable, num_of_nodes, path = idastar(state)
+    elif approach == 'ils':
+        solvable, num_of_nodes, path = ils(state)
 
     result = util.shapeshift(path) if solvable else None
     return jsonify({'solvable': solvable, 'level': len(result), 

@@ -1,5 +1,5 @@
-from heapq import heappush, heappop
 from .util import getpath 
+from heapq import heappush, heappop
 
 GOAL_STATE = '12345678X'
 g_visited = set()
@@ -40,7 +40,7 @@ def manhattan_dist(puzzle):
 
     return dist
 
-def astar(root):
+def astar(root, limit):
     '''implemention of astar algorithm
     '''
     global GOAL_STATE
@@ -61,21 +61,15 @@ def astar(root):
                 return self.priority < obj.priority
             return self.puzzle.state < obj.puzzle.state
 
-
-    # first of all check if the state is solvable at least
-    if root.solvable() == False:
-        return (False, 0, None)
-
-    # so reset parent and visited
-    g_parent.clear()
-    g_visited.clear()
-
-    # using a max-heap to store best choices
+    # using a heap to store best choices
     root_node = _Node(root, (0, 0))
     heap = [root_node]
 
     while len(heap) != 0 and heap[0].puzzle != GOAL_STATE:
         top = heappop(heap)
+        # limit == cutoff
+        if top.priority[0] >= limit:
+            return (False, 0, None)
 
         # mark current node as visited
         g_visited.add(top.puzzle)
@@ -107,4 +101,23 @@ def astar(root):
 
     # (solvable, num of nodes, path)
     return (True, len(g_visited), path)
+    
+def idastar(root):
+    global g_parent
+    global g_visited
+    
+    if root.solvable() == False:
+        return (False, 0, None)
+
+    limit = 5
+    answer = None
+    while answer == None:
+        g_parent.clear()
+        g_visited.clear()
+        answer = astar(root, limit)
+        if answer[0] == False:
+            answer = None
+        limit += 5
+    
+    return answer
 

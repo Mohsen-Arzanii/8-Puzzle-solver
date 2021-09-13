@@ -1,8 +1,9 @@
-from heapq import heappush, heappop
-from .util import getpath 
+from .util import getpath
+import heapq
 
 GOAL_STATE = '12345678X'
 g_visited = set()
+g_front = dict()
 g_parent = dict()
 g_position = {
     '1': (0, 0),
@@ -36,22 +37,22 @@ def manhattan_dist(puzzle):
         # actual row, column; treat all non-digits like X
         acrow, accol = g_position.get(cell, (2, 2))
         dist += abs(row - acrow) + abs(col - accol)
-        d = abs(row - acrow) + abs(col - accol)
 
     return dist
 
-def astar(root):
-    '''implemention of astar algorithm
+def ucs(root):
+    '''implementation of ucs algorithm
     '''
     global GOAL_STATE
     global g_parent
     global g_visited
+    global g_front
 
     class _Node:
         __slots__ = ('puzzle', 'priority')
         def __init__(self, puzzle, priority):
             self.puzzle = puzzle
-            self.priority = priority # priority is a tuple: (f, h)
+            self.priority = priority # priority is a tuple: (h,h)
 
         def __hash__(self):
             return hash(self.puzzle) ^ hash(self.priority)
@@ -60,29 +61,23 @@ def astar(root):
             if self.priority != obj.priority:
                 return self.priority < obj.priority
             return self.puzzle.state < obj.puzzle.state
-
-
-    # first of all check if the state is solvable at least
+    
     if root.solvable() == False:
+        #solvable, num_of_nodes, path = ucs(state) in app.py
         return (False, 0, None)
 
-    # so reset parent and visited
-    g_parent.clear()
-    g_visited.clear()
-
-    # using a max-heap to store best choices
+    # using a heap to store best choices
     root_node = _Node(root, (0, 0))
     heap = [root_node]
 
     while len(heap) != 0 and heap[0].puzzle != GOAL_STATE:
-        top = heappop(heap)
+        top = heapq.heappop(heap)
 
         # mark current node as visited
         g_visited.add(top.puzzle)
 
-        # cost of the node is f - h
-        # we will use it later in the child nodes to calculate f for children
-        cost = top.priority[0] - top.priority[1]
+        cost = top.priority[0]
+
         # generate all the possible neighbours
         children = top.puzzle.generate_states()
 
@@ -91,20 +86,32 @@ def astar(root):
             if child in g_visited:
                 continue
 
-            # set current node as parent of the children
-            g_parent[child.state] = top.puzzle.state 
             
-            # calculate h and f and make a node from this child
+            # calculate h and make a node from this child
             h = manhattan_dist(child)
-            f = h + (cost + 1) # the child node is on the next level so
-                               # the cost is 1 more than the parent cost
-            child_node = _Node(child, (f, h))
+            child_node = _Node(child, (h+cost, h+cost))
 
             # store on the heap
-            heappush(heap, child_node)
+            # search in the heap and check if the node is in it
+            g_parent[child.state] = top.puzzle.state
+            prev_cost = g_front.get(child_node.puzzle, None)
+            found = False
+            if prev_cost is not None:
+                if prev_cost > child_node.priority[0]:
+                    # find the node in frontier and replace it
+                    for idx, node in enumerate(heap):
+                        if node.puzzle == child_node.puzzle:
+                            found = True
+                            del heap[idx]
+                            heapq.heappush(heap, child_node)
+                            g_front[child_node.puzzle] = child_node.priority[0]
+                            break
+ 
+            if not found:
+                g_front[child_node.puzzle] = child_node.priority[0]
+                heapq.heappush(heap, child_node)
+                
 
-    path = getpath(GOAL_STATE, g_parent) 
-
+    path = getpath(GOAL_STATE, g_parent)
     # (solvable, num of nodes, path)
     return (True, len(g_visited), path)
-
